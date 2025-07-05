@@ -31,6 +31,9 @@
       <color rgba="0.75 0.75 0.75 1"/>
     </material>
 
+    <material name="brown">
+        <color rgba="0.6 0.4 0.2 1"/>
+    </material>
 
     <!-- BASE LINK -->
 
@@ -65,6 +68,11 @@
             <origin xyz="0.2 0 -0.04" rpy="0 0 3.14"/>
         </xacro:inertial_box>
     </link>
+
+    <gazebo reference="chassis">
+        <material>Gazebo/White</material>
+    </gazebo>
+
     
     <!-- LEFT WHEEL LINK -->
 
@@ -92,6 +100,10 @@
         </xacro:inertial_cylinder>
     </link>
 
+    <gazebo reference="left_wheel">
+        <material>Gazebo/Yellow</material>
+    </gazebo>
+
     <!-- RIGHT WHEEL LINK -->
 
     <joint name="right_wheel_joint" type="continuous">
@@ -118,6 +130,10 @@
         </xacro:inertial_cylinder>
     </link>
 
+    <gazebo reference="right_wheel">
+        <material>Gazebo/Yellow</material>
+    </gazebo>
+
     <!-- CASTER WHEEL LINK -->
 
     <joint name="caster_wheel_joint" type="fixed">
@@ -143,6 +159,12 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_sphere>
     </link>
+
+    <gazebo reference="caster_wheel">
+        <material>Gazebo/Black</material>
+        <mu1 value="0.001"/>
+        <mu2 value="0.001"/>
+    </gazebo>
 
     <!-- ACTUATOR_BODY LINK -->
 
@@ -171,6 +193,10 @@
             <origin xyz="0.0075 0 0" rpy="-1.571 0 3.14"/>
         </xacro:inertial_cylinder>
     </link>
+
+    <gazebo reference="actuator_body">
+        <material>Gazebo/Black</material>
+    </gazebo>
 
         <!-- ACTUATOR_ROD LINK -->
 
@@ -202,6 +228,10 @@
         </xacro:inertial_cylinder>
     </link>
 
+    <gazebo reference="actuator_rod">
+        <material>Gazebo/Silver</material>
+    </gazebo>
+
 
        <!-- FORKLIFT LINK -->
 
@@ -218,7 +248,7 @@
             <geometry>
               <mesh filename="file://$(find arms_bot)/meshes/forklift.stl" scale="1.0 1.0 1.0"/>
             </geometry>
-            <material name="silver"/>
+            <material name="brown"/>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy=" 0 0 1.5708"/>
@@ -230,6 +260,10 @@
             <origin xyz="0 0 0" rpy=" 0 0 1.5708"/>
         </xacro:inertial_box>
     </link>
+
+    <gazebo reference="forklift">
+        <material>Gazebo/Orange</material>
+    </gazebo>
 
 
 
