@@ -21,11 +21,14 @@ def generate_launch_description():
         launch_arguments={'use_sim_time': 'true'}.items()
     )
 
+    gazebo_params_file = os.path.join(get_package_share_directory(package_name),'config','gazebo_params.yaml')
+
     # Gazebo
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')
-        ])
+        ]),
+        launch_arguments={'extra_gazebo_args': '--ros-args --params-file ' + gazebo_params_file}.items()
     )
 
     # Spawn robot in Gazebo
@@ -46,7 +49,7 @@ def generate_launch_description():
 
     # Spawner: Diff drive controller (delayed)
     diff_drive_spawner = TimerAction(
-        period=5.0,
+        period=7.0,
         actions=[
             Node(
                 package='controller_manager',
@@ -58,17 +61,17 @@ def generate_launch_description():
     )
 
     # Spawner: Linear actuator controller (delayed)
-    # line_cont_spawner = TimerAction(
-    #     period=5.0,
-    #     actions=[
-    #         Node(
-    #             package='controller_manager',
-    #             executable='spawner',
-    #             arguments=['linear_actuator_controller'],
-    #             output='screen'
-    #         )
-    #     ]
-    # )
+    line_cont_spawner = TimerAction(
+        period=7.0,
+        actions=[
+            Node(
+                package='controller_manager',
+                executable='spawner',
+                arguments=['linear_actuator_controller'],
+                output='screen'
+            )
+        ]
+    )
 
     return LaunchDescription([
         rsp,
